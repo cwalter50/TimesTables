@@ -13,6 +13,7 @@
 		83B2FB39245331C500912744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B2FB38245331C500912744 /* Assets.xcassets */; };
 		83B2FB3C245331C500912744 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B2FB3B245331C500912744 /* Preview Assets.xcassets */; };
 		83B2FB3F245331C500912744 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B2FB3D245331C500912744 /* LaunchScreen.storyboard */; };
+		83B2FB472453E02700912744 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2FB462453E02700912744 /* Question.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		83B2FB3B245331C500912744 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83B2FB3E245331C500912744 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83B2FB40245331C500912744 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83B2FB462453E02700912744 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				83B2FB32245331C300912744 /* AppDelegate.swift */,
 				83B2FB34245331C300912744 /* SceneDelegate.swift */,
 				83B2FB36245331C300912744 /* ContentView.swift */,
+				83B2FB462453E02700912744 /* Question.swift */,
 				83B2FB38245331C500912744 /* Assets.xcassets */,
 				83B2FB3D245331C500912744 /* LaunchScreen.storyboard */,
 				83B2FB40245331C500912744 /* Info.plist */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83B2FB33245331C300912744 /* AppDelegate.swift in Sources */,
+				83B2FB472453E02700912744 /* Question.swift in Sources */,
 				83B2FB35245331C300912744 /* SceneDelegate.swift in Sources */,
 				83B2FB37245331C300912744 /* ContentView.swift in Sources */,
 			);
