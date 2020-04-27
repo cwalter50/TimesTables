@@ -8,23 +8,15 @@
 
 import SwiftUI
 
-struct CornerRotateModifier: ViewModifier {
-    let amount: Double
-    let anchor: UnitPoint
-
-    func body(content: Content) -> some View {
-        content.rotationEffect(.degrees(amount), anchor: anchor).clipped()
-    }
-}
-
 extension AnyTransition {
-    static var pivot: AnyTransition {
-        .modifier(
-            active: CornerRotateModifier(amount: -90, anchor: .topLeading),
-            identity: CornerRotateModifier(amount: 0, anchor: .topLeading)
-        )
-    }
+  static var customTransition: AnyTransition {
+    let transition = AnyTransition.move(edge: .top)
+      .combined(with: .scale(scale: 0.2, anchor: .top))
+      .combined(with: .opacity)
+    return transition
+  }
 }
+
 
 struct RoundButton: View {
     
@@ -51,7 +43,7 @@ struct RoundButton: View {
 struct AnimalImage: View {
     var name: String = "panda"
     
-    var animalNames = ["panda", "bear", "zebra", "shark", "gorilla", "bear", "buffalo", "chick", "chicken", "cow", "crocodile", "duck", "dog", "elephant", "frog", "giraffe", "goat", "hippo","horse", "moose", "narwhal", "owl", "parrot", "pig", "penguin", "rabbit", "rhino", "sloth", "snake", "wlarus", "whale" ]
+    var animalNames = ["panda", "bear", "zebra", "shark", "gorilla", "bear", "buffalo", "chick", "chicken", "cow", "crocodile", "duck", "dog", "elephant", "frog", "giraffe", "goat", "hippo","horse","monkey", "moose", "narwhal", "owl", "parrot", "pig", "penguin", "rabbit", "rhino", "sloth", "snake", "walrus", "whale" ]
     
     var body: some View {
         Image(animalNames[Int.random(in: 0..<animalNames.count)])
@@ -86,6 +78,11 @@ struct ContentView: View {
     
     @State var questionCounter = 0
     
+    
+    // animations
+    @State private var angle: Double = 0
+    @State private var dragAmount = CGSize.zero
+
     
     
     func createQuestions()
@@ -134,6 +131,9 @@ struct ContentView: View {
             // correct!!!
             correctQuestions += 1
             isCorrect = true
+            
+            // for animation
+            angle += 720
         }
         else { isCorrect = false }
         totalQuestions += 1
@@ -163,7 +163,8 @@ struct ContentView: View {
 
                       }
 //                    .frame(height: inGameMode ? 0: .none)
-                    .transition(.asymmetric(insertion: .scale, removal: .opacity))
+//                    .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                        .transition(.customTransition)
                 }
                 if inGameMode {
                     Group {
@@ -197,16 +198,24 @@ struct ContentView: View {
                         
                         Spacer()
                     
-                            
                         AnimalImage()
-                        
-                        
+                        .rotationEffect(.degrees(angle))
+                        .animation(.easeIn)
+                        .offset(dragAmount)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { self.dragAmount = $0.translation }
+                                .onEnded { _ in
+                                    withAnimation(.spring()) {
+                                        self.dragAmount = .zero
+                                    }
+                                }
+                        )
+                        .animation(.spring())
                         Spacer()
                     }
-//                    .frame(height: inGameMode ? .none: 0)
-                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
-                    
-//                    .animation(.easeInOut)
+                    .transition(.customTransition)
+//                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
                 }
                 Spacer()
             }
