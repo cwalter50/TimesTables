@@ -48,6 +48,19 @@ struct RoundButton: View {
     }
 }
 
+struct AnimalImage: View {
+    var name: String = "panda"
+    
+    var animalNames = ["panda", "bear", "zebra", "shark", "gorilla", "bear", "buffalo", "chick", "chicken", "cow", "crocodile", "duck", "dog", "elephant", "frog", "giraffe", "goat", "hippo","horse", "moose", "narwhal", "owl", "parrot", "pig", "penguin", "rabbit", "rhino", "sloth", "snake", "wlarus", "whale" ]
+    
+    var body: some View {
+        Image(animalNames[Int.random(in: 0..<animalNames.count)])
+            .resizable()
+            .frame(width: 100, height: 100, alignment: .center)
+        
+    }
+}
+
 struct ContentView: View {
     
     @State var inGameMode = false // this will toggle between settings mode and game mode
@@ -183,9 +196,15 @@ struct ContentView: View {
                         RoundButton(name: "Score: \(correctQuestions)/\(totalQuestions): Total Questions: \(numQuestions)", primaryColor: isCorrect ? Color.green: Color.red, secondaryColor: Color.white)
                         
                         Spacer()
+                    
+                            
+                        AnimalImage()
+                        
+                        
+                        Spacer()
                     }
 //                    .frame(height: inGameMode ? .none: 0)
-                    .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
                     
 //                    .animation(.easeInOut)
                 }
